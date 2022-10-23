@@ -38,3 +38,10 @@ optional arguments:
                         Prints the password instead of putting it to clipboard
   --verbose [VERBOSE], -v [VERBOSE]
 ```
+
+## Tests
+
+`mdp` has been tested on:
+
+- Ubuntu 20.04.5 LTS
+- macOS 11.6 (M1)
