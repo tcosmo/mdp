@@ -38,6 +38,23 @@ if not os.path.exists(str(Path.home())):
     print("No ssh config not found: `f{SSH_CONFIG}`")
     exit(1)
 
+def get_hosts():
+    config = open(SSH_CONFIG,"r")
+    content = config.read()
+    hostnames = []
+    for line in content.split("\n"):
+        line = line.strip()
+        takeNext = False
+        for word in line.split(" "):
+            word = word.strip()
+            if word == "":
+                continue
+            if takeNext:
+                hostnames.append(word)
+            if word == "Host":
+                takeNext = True
+
+    return hostnames
 
 proc = subprocess.Popen(
     [f"grep -P \"^Host ([^*]+)$\" {SSH_CONFIG} | sed 's/Host //'"],
@@ -46,7 +63,10 @@ proc = subprocess.Popen(
 )
 (out, _) = proc.communicate()
 
-hosts = filter(lambda x: x != "", out.decode().split("\n"))
+hosts = get_hosts()
+
+if VERBOSE:
+    print("Hosts:", hosts)
 
 for host in hosts:
     if VERBOSE:
