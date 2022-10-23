@@ -73,14 +73,15 @@ for host in hosts:
     (mdp, _) = proc.communicate()
 
     if proc.returncode == 0:
+        mdp = mdp.decode()
         if CLIP_OUTPUT:
-            ret = os.system(f"echo {mdp} | tr -d '\n' | tr -d '\r' | {CLIPPING_UTIL}")
+            ret = os.system(f"echo \"{mdp}\" | tr -d '\n' | tr -d '\r' | {CLIPPING_UTIL}")
             if ret == 0:
                 if VERBOSE:
                     print("Clipped!")
                 exit(0)
         else:
-            ret = os.system(f"echo {mdp} | tr -d '\n' | tr -d '\r'")
+            ret = os.system(f"echo \"{mdp}\" | tr -d '\n' | tr -d '\r'")
             if ret == 0:
                 exit(0)
 
