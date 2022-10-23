@@ -53,15 +53,8 @@ def get_hosts():
                 hostnames.append(word)
             if word == "Host":
                 takeNext = True
-
+    config.close()
     return hostnames
-
-proc = subprocess.Popen(
-    [f"grep -P \"^Host ([^*]+)$\" {SSH_CONFIG} | sed 's/Host //'"],
-    stdout=subprocess.PIPE,
-    shell=True,
-)
-(out, _) = proc.communicate()
 
 hosts = get_hosts()
 
