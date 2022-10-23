@@ -13,7 +13,7 @@ You need `python3` on your system (tested on `>= 3.8` but probably works with ea
 
 If you want a systemwide installation of `mdp` do:
 
-`./install.sh`
+`bash install.sh`
 
 ## Usage
 
